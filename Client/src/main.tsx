@@ -8,6 +8,8 @@ import {
 import './index.css'
 import Root from './view/Root'
 
+const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Auth0Provider
-      domain="dev-iq8asb2sio0birde.us.auth0.com"
-      clientId="FonUUR7sDzWYc3M17WFWonNBO7xqvY72"
+      domain={auth0Domain}
+      clientId={auth0ClientId}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
