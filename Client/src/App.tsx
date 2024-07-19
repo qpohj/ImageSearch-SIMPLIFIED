@@ -1,7 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
-import '../App.css';
+import './App.css';
+import SavedImages from './component/SavedImages';
 import SearchForm from './component/SearchForm';
+import UserData from './component/UserData';
 import LoginButton from './component/buttons/LoginButton';
 import LogoutButton from './component/buttons/LogoutButton';
 import { deleteImageFromServer, loadImages, saveImageToServer } from './services';
@@ -32,7 +34,7 @@ const App = () => {
           .then((response) => {
             if (response) {
               setSavedImages(
-                savedImages.filter((imageUrl) => imageUrl !== url)
+                savedImages.filter((imageURL) => imageURL !== url)
               );
             }
           })
@@ -57,11 +59,11 @@ const App = () => {
 
   return isAuthenticated ? (
     <>
-      <div >
+      <div>
         <div>
-          <span>ImageSearcher</span>
+          <span>Google Search</span>
           <div>
-            <Profile user={user} />
+            <UserData user={user} />
             <LogoutButton />
           </div>
         </div>
@@ -74,7 +76,7 @@ const App = () => {
           <div className="col-md-4">
             <span className="h5">Favorites</span>
             <hr />
-            <Favorites saveImage={saveImage} savedImages={savedImages} />
+            <SavedImages saveImage={saveImage} savedImages={savedImages} />
           </div>
         </div>
       </div>
