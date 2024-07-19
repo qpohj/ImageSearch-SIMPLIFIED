@@ -1,17 +1,28 @@
+interface ImageProps {
+    url: string;
+    saved: boolean;
+    saveImage(url: string): () => void;
+}
 
-
-const ImageGallery = ({ images = [] }) => {
+const ImageGallery = (props: ImageProps) => {
+    const { url, saveImage, saved } = props;
     return (
-        <div>
-            {images.map((image) => (
-                <div>
-                    <h4>{image.title}</h4>
-                    <img src={image.link} width={200} alt={image.htmlSnippet} />
-                    <p>{image.byteSize}</p>
-                </div>
-            ))}
-        </div>
-    );
-};
+        <>
+            <span
+                role="button"
+                onClick={() => saveImage(url)}>
 
-export default ImageGallery;
+            </span>
+
+            <img
+                src={url}
+                style={{
+                    border: "2px solid black",
+                    margin: "10px",
+                }}
+            />
+        </>
+    )
+}
+
+export default ImageGallery

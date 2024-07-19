@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom"
 import './index.css'
-import Root from './view/Root'
+import Root from './App'
 
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
