@@ -50,24 +50,35 @@ const SearchForm = (props: SearchProps) => {
             <div>
                 <input
                     type="text"
+                    style={{
+                        width: "250px",
+                        minHeight: "20px",
+                        borderRadius: "5px",
+                        height: "20px",
+                        padding: "2px 23px 2px 30px",
+                    }}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button onClick={() => handleSearch(searchQuery)}>
+                <button style={{
+                    background: "lightBlue"
+                }}onClick={() => handleSearch(searchQuery)}>
                     Search
                 </button>
             </div>
             <div>
-                Did you mean
+                Did you mean?<br/>
                 <span
                     role="button"
                     onClick={handleCorrectedSpelling}
+                    style={{color: "blueviolet"}}
                 >
                     {correctedSearchQuery}
                 </span>
             </div>
             <div>
-                Search took {searchDuration} seconds
+                Search took <span
+                style={{color: "blueviolet"}}>{searchDuration}</span>  seconds
             </div>
 
             <div>

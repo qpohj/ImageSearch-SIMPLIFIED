@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const images = await loadImages(user?.email ?? "");
+        const images = await loadImages(user?.nickname ?? "");
         setSavedImages(images);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -30,7 +30,8 @@ const App = () => {
   const saveImage = (url: string): (() => void) => {
     try {
       if (savedImages.includes(url)) {
-        deleteImageFromServer(user?.email ?? "", url)
+        console.log(user?.profile)
+        deleteImageFromServer(user?.nickname ?? "", url)
           .then((response) => {
             if (response) {
               setSavedImages(
@@ -40,7 +41,7 @@ const App = () => {
           })
           .catch((error) => console.error("Error:", error));
       } else {
-        saveImageToServer(user?.email ?? "", url)
+        saveImageToServer(user?.nickname ?? "", url)
           .then((response) => {
             if (response) {
               setSavedImages([...savedImages, url]);
@@ -61,20 +62,20 @@ const App = () => {
     <>
       <div>
         <div>
-          <span>Google Search</span>
+          <h1>Google Search</h1>
           <div>
             <UserData user={user} />
-            <LogoutButton />
+            <LogoutButton/>
           </div>
         </div>
         <div>
           <div>
-            <span>Search</span>
+            <h2>Search</h2>
             <hr />
             <SearchForm saveImage={saveImage} savedImages={savedImages} />
           </div>
-          <div className="col-md-4">
-            <span className="h5">Favorites</span>
+          <div>
+            <h2>Favorited</h2>
             <hr />
             <SavedImages saveImage={saveImage} savedImages={savedImages} />
           </div>

@@ -7,8 +7,15 @@ const UserData = (props: UserProps) => {
 
     return (
         <>
-            <img src={user.picture} alt={user.name + user.email}
+            <img style={{
+                    width: "200px",
+                    margin: "10px",
+                }}
+            src={user.picture} alt={user.name + "" + user.email}
             />
+            <div>
+                <p>{user.nickname}</p>
+            </div>
         </>
     )
 }

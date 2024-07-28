@@ -1,13 +1,13 @@
 const Joi = require("joi");
 
 const schemaAddFav = Joi.object({
-    userEmail: Joi.string().email().required(),
+    userNickname: Joi.string().required(),
     imageURL: Joi.string().uri().required(),
 });
 
 
 const schemaRemoveFav = Joi.object({
-    userEmail: Joi.string().email().required(),
+    userNickname: Joi.string().required(),
     imageURL: Joi.string().uri().required(),
 });
 

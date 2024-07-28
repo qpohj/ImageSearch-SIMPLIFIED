@@ -3,9 +3,9 @@ import axios from "axios"
 const googleApiKey = import.meta.env.VITE_GOOGLE_API;
 const googleCX = import.meta.env.VITE_SEARCH_ENGINE;
 
-export const loadImages = async (userEmail: string) => {
+export const loadImages = async (userNickname: string) => {
     try {
-        const response = await axios.get(`http://localhost:3001/img/${userEmail}`)
+        const response = await axios.get(`http://localhost:3001/image/${userNickname}`)
 
         return response.data;
     } catch (error) {
@@ -27,12 +27,12 @@ export const searchImages = async (searchTerm: string) => {
 };
 
 export const saveImageToServer = async (
-	userEmail: string,
+	userNickname: string,
 	imageURL: string
 ) => {
 	try {
 		const response = await axios.post(
-			`http://localhost:3001/img/${userEmail}/save`,
+			`http://localhost:3001/image/${userNickname}/save`,
 			{
 				imageURL,
 			}
@@ -45,12 +45,12 @@ export const saveImageToServer = async (
 };
 
 export const deleteImageFromServer = async (
-	userEmail: string,
+	userNickname: string,
 	imageURL: string
 ) => {
 	try {
 		const response = await axios.post(
-			`http://localhost:3001/img/${userEmail}/delete`,
+			`http://localhost:3001/image/${userNickname}/delete`,
 			{
 				imageURL,
 			}

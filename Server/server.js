@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors")
-const fs = require("fs");
+const fs = require("fs").promises;
 const { schemaAddFav, schemaRemoveFav } = require("./joiSchema");
 
 const app = express();
@@ -15,10 +15,10 @@ const port = process.env.SERVER_PORT || 3001;
 
 
 
-app.get('/img/:userEmail', async (req, res) => {
+app.get('/image/:userNickname', async (req, res) => {
 
-  const { userEmail } = req.params;
-  const filePath = `userImages/${userEmail}.json`;
+  const { userNickname } = req.params;
+  const filePath = `userImages/${userNickname}.json`;
   try {
     const images = await fs.readFile(filePath, "utf8").then(JSON.parse);
     return res.json(images);
@@ -27,13 +27,13 @@ app.get('/img/:userEmail', async (req, res) => {
   }
 })
 
-app.post('/img/:userEmail/save', async (req, res) => {
+app.post('/image/:userNickname/save', async (req, res) => {
   try {
-		const { userEmail } = req.params;
+		const { userNickname } = req.params;
 		const { imageURL } = req.body;
-		schemaAddFav.validate({ userEmail, imageURL });
+		schemaAddFav.validate({ userNickname, imageURL });
 
-		const filePath = `userImages/${userEmail}.json`;
+		const filePath = `userImages/${userNickname}.json`;
 		let images = [];
 		try {
 			images = JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -47,13 +47,13 @@ app.post('/img/:userEmail/save', async (req, res) => {
 	}
 })
 
-app.post('/img/:userEmail/delete', async (req, res) => {
+app.post('/image/:userNickname/delete', async (req, res) => {
   try {
-		const { userEmail } = req.params;
+		const { userNickname } = req.params;
 		const { imageURL } = req.body;
-		schemaRemoveFav.validate({ userEmail, imageURL });
+		schemaRemoveFav.validate({ userNickname, imageURL });
 
-		const filePath = `userImages/${userEmail}.json`;
+		const filePath = `userImages/${userNickname}.json`;
 		let images = [];
 		try {
 			images = JSON.parse(await fs.readFile(filePath, "utf8"));

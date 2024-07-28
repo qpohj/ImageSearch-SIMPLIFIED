@@ -10,13 +10,16 @@ const ImageGallery = (props: ImageProps) => {
         <>
             <span
                 role="button"
-                onClick={() => saveImage(url)}>
-
+                onClick={() => saveImage(url)}
+                
+            >
+             {saved ? "Click here to unsave" : "Click here to save" }
             </span>
 
             <img
                 src={url}
                 style={{
+                    width: "400px",
                     border: "2px solid black",
                     margin: "10px",
                 }}
